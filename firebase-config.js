@@ -11,8 +11,7 @@ const firebaseConfig = {
   projectId: "textos-b776e",
   storageBucket: "textos-b776e.firebasestorage.app",
   messagingSenderId: "529394273381",
-  appId: "1:529394273381:web:2fe444dc692038702d0a8c",
-  measurementId: "G-7YNPHED92M"
+  appId: "1:529394273381:web:2fe444dc692038702d0a8c"
 };
 
 // Initialize Firebase
