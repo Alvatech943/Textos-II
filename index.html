@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ruleta de preguntas — Ética informática</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <h1>Ruleta de preguntas: Ingeniería en Sistemas y dilemas éticos</h1>
+    <p class="subtitle">Cada pregunta correcta vale 0.25 puntos. Al responder las 20 preguntas correctamente obtienes 5.0.</p>
+  </header>
+
+  <main class="app-main">
+
+    <section id="loginSection" class="panel">
+      <h2>Ingresa tu nombre para comenzar</h2>
+      <div class="login-row">
+        <input type="text" id="playerNameInput" placeholder="Nombre completo" maxlength="40" />
+        <button id="startBtn">Comenzar</button>
+      </div>
+      <p id="loginError" class="error-text" style="display:none;">Escribe tu nombre antes de comenzar.</p>
+    </section>
+
+    <section id="gameSection" class="panel" style="display:none;">
+      <div class="game-top">
+        <div>
+          <p class="player-label">Jugador</p>
+          <p id="playerNameDisplay" class="player-name"></p>
+        </div>
+        <div class="score-box">
+          <p class="score-label">Puntaje</p>
+          <p id="scoreDisplay" class="score-value">0.00 / 5.0</p>
+        </div>
+        <div class="progress-box">
+          <p class="progress-label">Preguntas restantes</p>
+          <p id="remainingDisplay" class="progress-value">20</p>
+        </div>
+      </div>
+
+      <div class="wheel-area">
+        <div class="wheel-wrapper">
+          <div class="pointer"></div>
+          <canvas id="wheel" width="360" height="360"></canvas>
+        </div>
+        <button id="spinBtn">Girar la ruleta</button>
+      </div>
+
+      <div id="finishedBox" class="finished-box" style="display:none;">
+        <h3>¡Juego terminado!</h3>
+        <p>Tu puntaje final fue <strong id="finalScoreText"></strong>.</p>
+        <button id="playAgainBtn">Jugar de nuevo</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Tabla de posiciones</h2>
+      <table id="leaderboardTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Puntaje</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody"></tbody>
+      </table>
+      <p id="leaderboardEmpty" class="empty-text" style="display:none;">Todavía no hay puntajes registrados.</p>
+    </section>
+
+  </main>
+
+  <div id="questionModal" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <p id="modalQuestionNumber" class="modal-question-number"></p>
+      <p id="modalQuestionText" class="modal-question-text"></p>
+      <div id="modalOptions" class="modal-options"></div>
+      <div id="modalFeedback" class="modal-feedback" style="display:none;"></div>
+      <button id="modalContinueBtn" class="modal-continue" style="display:none;">Continuar</button>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
