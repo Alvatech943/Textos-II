@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /leaderboard/{entryId} {
+      // Cualquiera puede leer la tabla de posiciones.
+      allow read: if true;
+
+      // Solo se permite crear puntajes nuevos, con datos válidos.
+      // No se permite editar ni borrar puntajes ya guardados desde el cliente.
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() <= 60
+                    && request.resource.data.score is number
+                    && request.resource.data.score >= 0
+                    && request.resource.data.score <= 5;
+
+      allow update, delete: if false;
+    }
+  }
+}

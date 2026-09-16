@@ -1,5 +1,8 @@
-const LEADERBOARD_KEY = "textosII_leaderboard";
 const POINTS_PER_QUESTION = 0.25;
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const leaderboardRef = db.collection("leaderboard");
 
 let playerName = "";
 let score = 0;
@@ -177,34 +180,39 @@ function finishGame() {
   finishedBox.style.display = "block";
   spinBtn.disabled = true;
   saveScore(playerName, score);
-  renderLeaderboard();
 }
 
 function saveScore(name, finalScore) {
-  const entries = loadLeaderboard();
-  entries.push({
-    name: name,
-    score: Number(finalScore.toFixed(2)),
-    date: new Date().toLocaleDateString("es-CO")
-  });
-  localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(entries));
+  leaderboardRef
+    .add({
+      name: name,
+      score: Number(finalScore.toFixed(2)),
+      date: new Date().toLocaleDateString("es-CO"),
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .catch((err) => {
+      console.error("No se pudo guardar el puntaje:", err);
+      alert("No se pudo guardar tu puntaje en la base de datos. Revisa tu conexión e inténtalo de nuevo.");
+    });
 }
 
-function loadLeaderboard() {
-  const raw = localStorage.getItem(LEADERBOARD_KEY);
-  if (!raw) return [];
-  try {
-    return JSON.parse(raw);
-  } catch (e) {
-    return [];
-  }
+function subscribeToLeaderboard() {
+  leaderboardRef.orderBy("score", "desc").limit(100).onSnapshot(
+    (snapshot) => {
+      renderLeaderboard(snapshot.docs.map((doc) => doc.data()));
+    },
+    (err) => {
+      console.error("No se pudo cargar la tabla de posiciones:", err);
+      leaderboardEmpty.style.display = "block";
+      leaderboardEmpty.textContent = "No se pudo cargar la tabla de posiciones. Revisa la configuración de Firebase.";
+    }
+  );
 }
 
-function renderLeaderboard() {
-  const entries = loadLeaderboard().sort((a, b) => b.score - a.score);
+function renderLeaderboard(entries) {
   leaderboardBody.innerHTML = "";
 
-  if (entries.length === 0) {
+  if (!entries || entries.length === 0) {
     leaderboardEmpty.style.display = "block";
     return;
   }
@@ -215,7 +223,7 @@ function renderLeaderboard() {
     row.innerHTML =
       "<td>" + (index + 1) + "</td>" +
       "<td>" + escapeHtml(entry.name) + "</td>" +
-      "<td>" + entry.score.toFixed(2) + "</td>" +
+      "<td>" + Number(entry.score).toFixed(2) + "</td>" +
       "<td>" + escapeHtml(entry.date) + "</td>";
     leaderboardBody.appendChild(row);
   });
@@ -250,4 +258,4 @@ playAgainBtn.addEventListener("click", () => {
   playerNameInput.focus();
 });
 
-renderLeaderboard();
+subscribeToLeaderboard();
