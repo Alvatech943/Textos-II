@@ -1,7 +1,14 @@
 // Banco de preguntas — Ingeniería en Sistemas y dilemas éticos
 // Cada pregunta vale 0.25 puntos. 20 preguntas x 0.25 = 5.0 puntos.
+//
+// type: "mc"          -> pregunta de opción múltiple normal.
+// type: "fill_blank"  -> el texto trae "____" donde va la palabra/frase que falta;
+//                        las 4 opciones son posibles palabras para llenar ese espacio.
+// audio: true         -> muestra un botón para escuchar la pregunta en voz alta.
 const QUESTIONS = [
   {
+    type: "mc",
+    audio: true,
     text: "¿Cuál es el objetivo principal del artículo?",
     options: [
       "Explicar cómo desarrollar aplicaciones web.",
@@ -12,26 +19,34 @@ const QUESTIONS = [
     correctIndex: 1
   },
   {
-    text: "¿En qué revista fue publicado el artículo?",
+    type: "fill_blank",
+    audio: true,
+    text: "El artículo fue publicado en la revista ____.",
     options: [
-      "Revista Colombiana de Tecnología.",
-      "Revista Dilemas Contemporáneos: Educación, Política y Valores.",
-      "Revista Latinoamericana de Informática.",
-      "Revista Internacional de Ingeniería."
+      "Revista Colombiana de Tecnología",
+      "Revista Dilemas Contemporáneos: Educación, Política y Valores",
+      "Revista Latinoamericana de Informática",
+      "Revista Internacional de Ingeniería"
     ],
     correctIndex: 1
   },
   {
-    text: "¿En qué año fue publicado el artículo?",
+    type: "fill_blank",
+    audio: true,
+    text: "El artículo fue publicado en el año ____.",
     options: ["2015", "2016", "2018", "2020"],
     correctIndex: 2
   },
   {
-    text: "¿Qué tecnología se presenta como uno de los principales medios de transformación de la sociedad?",
-    options: ["Internet.", "La televisión.", "La radio.", "La telefonía tradicional."],
+    type: "fill_blank",
+    audio: true,
+    text: "____ se presenta como uno de los principales medios de transformación de la sociedad.",
+    options: ["Internet", "La televisión", "La radio", "La telefonía tradicional"],
     correctIndex: 0
   },
   {
+    type: "mc",
+    audio: false,
     text: "¿Cuál de las siguientes áreas ha sido transformada por las TIC?",
     options: [
       "Únicamente la educación.",
@@ -42,6 +57,8 @@ const QUESTIONS = [
     correctIndex: 2
   },
   {
+    type: "mc",
+    audio: false,
     text: "¿Qué problemas pueden surgir debido al uso incorrecto de las TIC?",
     options: [
       "Invasión de la privacidad y violación de derechos de autor.",
@@ -52,16 +69,15 @@ const QUESTIONS = [
     correctIndex: 0
   },
   {
-    text: "¿Qué es la Ética Informática según el artículo?",
-    options: [
-      "Una técnica para programar computadores.",
-      "Una disciplina que analiza los problemas éticos relacionados con la tecnología informática.",
-      "Una herramienta para aumentar la velocidad de Internet.",
-      "Un método para reparar computadores."
-    ],
-    correctIndex: 1
+    type: "fill_blank",
+    audio: true,
+    text: "La ____ es una disciplina que analiza los problemas éticos creados, transformados o agravados por la tecnología informática.",
+    options: ["Ética Informática", "Ingeniería de Sistemas", "Ciencia de Datos", "Ciberseguridad"],
+    correctIndex: 0
   },
   {
+    type: "mc",
+    audio: false,
     text: "¿Cuál es una de las preocupaciones relacionadas con la información?",
     options: [
       "Que sea demasiado fácil de imprimir.",
@@ -72,21 +88,22 @@ const QUESTIONS = [
     correctIndex: 1
   },
   {
-    text: "¿Cuáles son los cuatro conceptos éticos fundamentales mencionados en el artículo?",
-    options: [
-      "Velocidad, eficiencia, programación y diseño.",
-      "Intimidad, exactitud, propiedad intelectual y accesibilidad.",
-      "Seguridad, economía, programación y redes.",
-      "Internet, software, hardware y datos."
-    ],
-    correctIndex: 1
+    type: "fill_blank",
+    audio: true,
+    text: "Los cuatro conceptos éticos fundamentales son intimidad, exactitud, ____ y accesibilidad.",
+    options: ["propiedad intelectual", "seguridad informática", "velocidad de procesamiento", "eficiencia energética"],
+    correctIndex: 0
   },
   {
-    text: "¿Qué responsabilidad tiene el ingeniero de sistemas además de la responsabilidad técnica?",
-    options: ["Responsabilidad comercial.", "Responsabilidad política.", "Responsabilidad social.", "Responsabilidad financiera."],
+    type: "fill_blank",
+    audio: true,
+    text: "Además de la responsabilidad técnica, el ingeniero de sistemas tiene responsabilidad ____.",
+    options: ["comercial", "política", "social", "financiera"],
     correctIndex: 2
   },
   {
+    type: "mc",
+    audio: false,
     text: "¿Por qué no es suficiente que un programa informático simplemente funcione?",
     options: [
       "Porque debe considerar también la seguridad, privacidad, exactitud de la información y su impacto social.",
@@ -97,16 +114,22 @@ const QUESTIONS = [
     correctIndex: 0
   },
   {
+    type: "mc",
+    audio: false,
     text: "¿Cuál de los siguientes es un dilema ético relacionado con Internet?",
     options: ["La privacidad de las personas.", "El tamaño de los computadores.", "La velocidad del procesador.", "La duración de una batería."],
     correctIndex: 0
   },
   {
-    text: "¿Qué problema puede presentarse con la propiedad intelectual del software?",
-    options: ["La piratería y reproducción ilegal de programas.", "La falta de electricidad.", "La velocidad de descarga.", "El tamaño de los archivos."],
+    type: "fill_blank",
+    audio: true,
+    text: "Un problema relacionado con la propiedad intelectual del software es la ____ y reproducción ilegal de programas.",
+    options: ["piratería", "falta de electricidad", "velocidad de descarga", "tamaño de los archivos"],
     correctIndex: 0
   },
   {
+    type: "mc",
+    audio: false,
     text: "¿Qué problema ético puede surgir cuando los sistemas informáticos toman decisiones?",
     options: [
       "Determinar quién asume la responsabilidad cuando una decisión automatizada causa consecuencias negativas.",
@@ -117,6 +140,8 @@ const QUESTIONS = [
     correctIndex: 0
   },
   {
+    type: "mc",
+    audio: true,
     text: "¿Qué puede ocurrir cuando existe anonimato en Internet?",
     options: [
       "Desaparecen todos los problemas éticos.",
@@ -127,11 +152,15 @@ const QUESTIONS = [
     correctIndex: 1
   },
   {
+    type: "mc",
+    audio: false,
     text: "¿Qué debe respetar el profesional de ingeniería de sistemas respecto a la información?",
     options: ["El secreto profesional y la confidencialidad.", "Solamente la velocidad de procesamiento.", "Únicamente los intereses económicos.", "Ninguna norma."],
     correctIndex: 0
   },
   {
+    type: "mc",
+    audio: false,
     text: "¿Qué significa la responsabilidad técnica del ingeniero de sistemas?",
     options: [
       "Considerar únicamente las consecuencias económicas del software.",
@@ -142,6 +171,8 @@ const QUESTIONS = [
     correctIndex: 1
   },
   {
+    type: "mc",
+    audio: false,
     text: "¿Qué significa responsabilidad social en el desarrollo de software?",
     options: [
       "Considerar el impacto de los productos informáticos sobre la sociedad.",
@@ -152,6 +183,8 @@ const QUESTIONS = [
     correctIndex: 0
   },
   {
+    type: "mc",
+    audio: false,
     text: "Según las conclusiones, ¿por qué es importante incorporar la ética en la formación de los profesionales informáticos?",
     options: [
       "Porque permite complementar la preparación técnica con criterios para afrontar problemas éticos y sociales.",
@@ -162,6 +195,8 @@ const QUESTIONS = [
     correctIndex: 0
   },
   {
+    type: "mc",
+    audio: true,
     text: "¿Cuál resume mejor la idea principal del artículo?",
     options: [
       "La tecnología debe desarrollarse sin restricciones.",

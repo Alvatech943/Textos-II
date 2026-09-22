@@ -171,6 +171,19 @@ th { color: #5f5b52; font-weight: 500; font-size: 12px; }
   font-size: 12px;
   color: #5f5b52;
   margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.audio-btn {
+  display: inline-block;
+  height: 34px;
+  padding: 0 14px;
+  margin: 0 0 1rem;
+  font-size: 13px;
+  background: #ffffff;
+  color: #26221c;
+  border: 1px solid #d3cfc2;
 }
 
 .modal-question-text {

@@ -116,13 +116,40 @@ function spin() {
   }, 4100);
 }
 
+function speakQuestion(text) {
+  if (!("speechSynthesis" in window)) {
+    alert("Tu navegador no soporta la lectura en voz alta.");
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const spokenText = text.replace(/_{3,}/g, " un espacio en blanco ");
+  const utterance = new SpeechSynthesisUtterance(spokenText);
+  utterance.lang = "es-CO";
+  utterance.rate = 0.95;
+  window.speechSynthesis.speak(utterance);
+}
+
 function openQuestionModal(qIndex) {
   const q = QUESTIONS[qIndex];
-  modalQuestionNumber.textContent = "Pregunta " + (qIndex + 1);
+  const typeLabel = q.type === "fill_blank" ? "Completa la palabra" : "Opción múltiple";
+  modalQuestionNumber.textContent = "Pregunta " + (qIndex + 1) + " · " + typeLabel;
   modalQuestionText.textContent = q.text;
   modalFeedback.style.display = "none";
   modalContinueBtn.style.display = "none";
   modalOptions.innerHTML = "";
+
+  const existingAudioBtn = document.getElementById("audioBtn");
+  if (existingAudioBtn) existingAudioBtn.remove();
+
+  if (q.audio) {
+    const audioBtn = document.createElement("button");
+    audioBtn.id = "audioBtn";
+    audioBtn.className = "audio-btn";
+    audioBtn.type = "button";
+    audioBtn.textContent = "🔊 Escuchar pregunta";
+    audioBtn.addEventListener("click", () => speakQuestion(q.text));
+    modalQuestionText.insertAdjacentElement("afterend", audioBtn);
+  }
 
   q.options.forEach((optionText, optionIndex) => {
     const btn = document.createElement("button");
