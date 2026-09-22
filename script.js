@@ -116,14 +116,19 @@ function spin() {
   }, 4100);
 }
 
-function speakQuestion(text) {
+function speakQuestion(q) {
   if (!("speechSynthesis" in window)) {
     alert("Tu navegador no soporta la lectura en voz alta.");
     return;
   }
   window.speechSynthesis.cancel();
-  const spokenText = text.replace(/_{3,}/g, " un espacio en blanco ");
-  const utterance = new SpeechSynthesisUtterance(spokenText);
+  const letters = ["A", "B", "C", "D"];
+  const questionPart = q.text.replace(/_{3,}/g, " un espacio en blanco ");
+  const optionsPart = q.options
+    .map((opt, i) => "Opción " + letters[i] + ": " + opt)
+    .join(". ");
+  const fullText = questionPart + ". " + optionsPart;
+  const utterance = new SpeechSynthesisUtterance(fullText);
   utterance.lang = "es-CO";
   utterance.rate = 0.95;
   window.speechSynthesis.speak(utterance);
@@ -141,15 +146,13 @@ function openQuestionModal(qIndex) {
   const existingAudioBtn = document.getElementById("audioBtn");
   if (existingAudioBtn) existingAudioBtn.remove();
 
-  if (q.audio) {
-    const audioBtn = document.createElement("button");
-    audioBtn.id = "audioBtn";
-    audioBtn.className = "audio-btn";
-    audioBtn.type = "button";
-    audioBtn.textContent = "🔊 Escuchar pregunta";
-    audioBtn.addEventListener("click", () => speakQuestion(q.text));
-    modalQuestionText.insertAdjacentElement("afterend", audioBtn);
-  }
+  const audioBtn = document.createElement("button");
+  audioBtn.id = "audioBtn";
+  audioBtn.className = "audio-btn";
+  audioBtn.type = "button";
+  audioBtn.textContent = "🔊 Escuchar pregunta y opciones";
+  audioBtn.addEventListener("click", () => speakQuestion(q));
+  modalQuestionText.insertAdjacentElement("afterend", audioBtn);
 
   q.options.forEach((optionText, optionIndex) => {
     const btn = document.createElement("button");

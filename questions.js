@@ -46,7 +46,7 @@ const QUESTIONS = [
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "¿Cuál de las siguientes áreas ha sido transformada por las TIC?",
     options: [
       "Únicamente la educación.",
@@ -58,7 +58,7 @@ const QUESTIONS = [
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "¿Qué problemas pueden surgir debido al uso incorrecto de las TIC?",
     options: [
       "Invasión de la privacidad y violación de derechos de autor.",
@@ -77,7 +77,7 @@ const QUESTIONS = [
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "¿Cuál es una de las preocupaciones relacionadas con la información?",
     options: [
       "Que sea demasiado fácil de imprimir.",
@@ -103,7 +103,7 @@ const QUESTIONS = [
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "¿Por qué no es suficiente que un programa informático simplemente funcione?",
     options: [
       "Porque debe considerar también la seguridad, privacidad, exactitud de la información y su impacto social.",
@@ -115,7 +115,7 @@ const QUESTIONS = [
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "¿Cuál de los siguientes es un dilema ético relacionado con Internet?",
     options: ["La privacidad de las personas.", "El tamaño de los computadores.", "La velocidad del procesador.", "La duración de una batería."],
     correctIndex: 0
@@ -129,7 +129,7 @@ const QUESTIONS = [
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "¿Qué problema ético puede surgir cuando los sistemas informáticos toman decisiones?",
     options: [
       "Determinar quién asume la responsabilidad cuando una decisión automatizada causa consecuencias negativas.",
@@ -153,14 +153,14 @@ const QUESTIONS = [
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "¿Qué debe respetar el profesional de ingeniería de sistemas respecto a la información?",
     options: ["El secreto profesional y la confidencialidad.", "Solamente la velocidad de procesamiento.", "Únicamente los intereses económicos.", "Ninguna norma."],
     correctIndex: 0
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "¿Qué significa la responsabilidad técnica del ingeniero de sistemas?",
     options: [
       "Considerar únicamente las consecuencias económicas del software.",
@@ -172,7 +172,7 @@ const QUESTIONS = [
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "¿Qué significa responsabilidad social en el desarrollo de software?",
     options: [
       "Considerar el impacto de los productos informáticos sobre la sociedad.",
@@ -184,7 +184,7 @@ const QUESTIONS = [
   },
   {
     type: "mc",
-    audio: false,
+    audio: true,
     text: "Según las conclusiones, ¿por qué es importante incorporar la ética en la formación de los profesionales informáticos?",
     options: [
       "Porque permite complementar la preparación técnica con criterios para afrontar problemas éticos y sociales.",
